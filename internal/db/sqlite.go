@@ -7,18 +7,20 @@ import (
 	_ "modernc.org/sqlite"
 )
 
-var db *sql.DB
+var DB *sql.DB
 
 func Connect(dbPath string) {
-	db, err := sql.Open("sqlite", dbPath)
+	database, err := sql.Open("sqlite", dbPath)
 
 	if err != nil {
 		log.Fatal("Db connection error", err)
 	}
 
-	if err = db.Ping(); err != nil {
+	if err = database.Ping(); err != nil {
 		log.Fatal("Db ping error", err)
 	}
+
+	DB = database
 
 }
 
