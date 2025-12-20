@@ -1,11 +1,21 @@
 package repositories
 
 import (
+	"database/sql"
+
 	"github.com/rajkovrga/1000words-game/internal/db"
 	gamemodel "github.com/rajkovrga/1000words-game/internal/models/game"
 )
 
-func getGameWords(
+type WordRepository struct {
+	db *sql.DB
+}
+
+func NewWordRepository(db *sql.DB) *WordRepository {
+	return &WordRepository{db: db}
+}
+
+func (wordRepository *WordRepository) GetGameWords(
 	nativeLanguageId int,
 	targetLanguageId int,
 	level int,
@@ -26,7 +36,7 @@ func getGameWords(
 	from words w
 	inner join word_translations wt1 on wt1.word_id = w.id and language_id = ?
 	inner join word_translations wt2 on wt2.word_id = w.id and language id = ?
-	order by id
+	ORDER BY RANDOM()
 	LIMIT ? OFFSET ?
 	`, nativeLanguageId, targetLanguageId, limit, offset)
 

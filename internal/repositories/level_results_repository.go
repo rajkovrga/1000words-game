@@ -1,11 +1,21 @@
 package repositories
 
 import (
+	"database/sql"
+
 	"github.com/rajkovrga/1000words-game/internal/db"
 	dbmodel "github.com/rajkovrga/1000words-game/internal/models/db"
 )
 
-func getLevelResultByUserId(userId int) (*dbmodel.LevelResult, error) {
+type LevelResultsRepository struct {
+	db *sql.DB
+}
+
+func newLevelResultsRepository(db *sql.DB) *LevelResultsRepository {
+	return &LevelResultsRepository{db: db}
+}
+
+func (levelResultsRepository *LevelResultsRepository) GetLevelResultByUserId(userId int) (*dbmodel.LevelResult, error) {
 	var levelResult dbmodel.LevelResult
 
 	err := db.DB.QueryRow(`

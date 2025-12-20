@@ -1,11 +1,21 @@
 package repositories
 
 import (
+	"database/sql"
+
 	"github.com/rajkovrga/1000words-game/internal/db"
 	dbmodel "github.com/rajkovrga/1000words-game/internal/models/db"
 )
 
-func getFirstUser() (*dbmodel.User, error) {
+type UserRepository struct {
+	db *sql.DB
+}
+
+func NewUserRepository(db *sql.DB) *UserRepository {
+	return &UserRepository{db: db}
+}
+
+func (userRepository *UserRepository) GetFirstUser() (*dbmodel.User, error) {
 	var user dbmodel.User
 
 	err := db.DB.QueryRow(`
