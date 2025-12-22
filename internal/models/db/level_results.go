@@ -1,6 +1,9 @@
 package dbmodel
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
 
 type LevelResult struct {
 	Id               int
@@ -8,7 +11,7 @@ type LevelResult struct {
 	TargetLanguageId int
 	Level            int
 	Success          bool
-	LevelCompletedAt *time.Time
-	TotalCompletedAt *time.Time
+	LevelCompletedAt sql.NullTime
+	TotalCompletedAt sql.NullTime
 	CreatedAt        time.Time
 }

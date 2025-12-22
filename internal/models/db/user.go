@@ -1,6 +1,9 @@
 package dbmodel
 
-import "time"
+import (
+	"database/sql"
+	"time"
+)
 
 type User struct {
 	Id               int
@@ -8,6 +11,6 @@ type User struct {
 	RoleId           int
 	NativeLanguageId int
 	CreatedAt        time.Time
-	UpdatedAt        *time.Time
-	DeletedAt        *time.Time
+	UpdatedAt        sql.NullTime
+	DeletedAt        sql.NullTime
 }
