@@ -1,7 +1,7 @@
 package data
 
 import (
-	"1000words-game/models"
+	models "1000words-game/models/game"
 )
 
 func GetLevelWords(level int) []models.Question {

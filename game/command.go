@@ -1,7 +1,7 @@
 package game
 
 import (
-	"1000words-game/models"
+	models "1000words-game/models/game"
 	"1000words-game/utils"
 	"bufio"
 	"fmt"
