@@ -41,6 +41,13 @@ func main() {
 	userService := services.NewUserService(userRepository)
 	languageService := services.NewLanguageService(languageRepository)
 
+	practiceService := services.NewPracticeService(
+		wordRepository,
+		levelRepository,
+		languageService,
+		cfg.WordsPerLevel,
+	)
+
 	progressService := services.NewProgressService(
 		progressRepository,
 		languageRepository,
@@ -76,10 +83,10 @@ func main() {
 		AuthorizationService: authorizationService,
 		UserService:          userService,
 		LanguageService:      languageService,
+		PracticeService:      practiceService,
 		ProgressService:      progressService,
 		GameService:          gameService,
 	})
-
 	server := api.NewServer(cfg, router)
 
 	serverErrors := make(chan error, 1)

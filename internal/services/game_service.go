@@ -181,3 +181,88 @@ func (s *GameService) FinishLevel(
 
 	return nextLevel, nil
 }
+
+func (s *GameService) FinishGame(
+	userID int,
+	progress gameModels.ProgressOption,
+	attemptID int,
+	correctCount int,
+	wrongCount int,
+	totalQuestions int,
+) (*gameModels.FinishGameResult, error) {
+	if userID <= 0 {
+		return nil, errors.New("user id is required")
+	}
+
+	if attemptID <= 0 {
+		return nil, errors.New("attempt id is required")
+	}
+
+	if correctCount < 0 {
+		return nil, errors.New("correct count cannot be negative")
+	}
+
+	if wrongCount < 0 {
+		return nil, errors.New("wrong count cannot be negative")
+	}
+
+	if totalQuestions <= 0 {
+		return nil, errors.New("total questions is required")
+	}
+
+	if correctCount+wrongCount != totalQuestions {
+		return nil, errors.New("correct count and wrong count must match total questions")
+	}
+
+	attempt, err := s.attemptRepository.FindByID(attemptID)
+	if err != nil {
+		return nil, err
+	}
+
+	if attempt.UserID != userID {
+		return nil, errors.New("attempt does not belong to user")
+	}
+
+	if attempt.TargetLanguageID != progress.TargetLanguageID ||
+		attempt.NativeLanguageID != progress.NativeLanguageID {
+		return nil, errors.New("attempt does not match selected progress")
+	}
+
+	if attempt.LevelID != progress.CurrentLevelID {
+		return nil, errors.New("attempt does not match current progress level")
+	}
+
+	if totalQuestions > attempt.TotalQuestions {
+		return nil, errors.New("total questions cannot be greater than attempt questions")
+	}
+
+	level, err := s.levelRepository.FindByID(attempt.LevelID)
+	if err != nil {
+		return nil, err
+	}
+
+	passed := wrongCount < level.MaxWrongAnswers && totalQuestions == attempt.TotalQuestions
+
+	result := gameModels.Result{
+		CorrectCount:   correctCount,
+		WrongCount:     wrongCount,
+		TotalQuestions: totalQuestions,
+		Passed:         passed,
+	}
+
+	nextLevel, err := s.FinishLevel(attemptID, progress.ProgressID, result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &gameModels.FinishGameResult{
+		AttemptID:       attemptID,
+		ProgressID:      progress.ProgressID,
+		CorrectCount:    correctCount,
+		WrongCount:      wrongCount,
+		TotalQuestions:  totalQuestions,
+		MaxWrongAnswers: level.MaxWrongAnswers,
+		Passed:          passed,
+		NextLevel:       nextLevel,
+	}, nil
+}

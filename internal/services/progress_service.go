@@ -34,6 +34,30 @@ func (s *ProgressService) GetUserProgressOptions(userID int) ([]gameModels.Progr
 	return s.progressRepository.GetOptionsByUserID(userID)
 }
 
+func (s *ProgressService) GetUserProgressOptionByID(
+	userID int,
+	progressID int,
+) (*gameModels.ProgressOption, error) {
+	if userID <= 0 {
+		return nil, errors.New("user id is required")
+	}
+
+	if progressID <= 0 {
+		return nil, errors.New("progress id is required")
+	}
+
+	option, err := s.progressRepository.FindOptionByID(progressID)
+	if err != nil {
+		return nil, errors.New("progress not found")
+	}
+
+	if option.UserID != userID {
+		return nil, errors.New("progress not found")
+	}
+
+	return option, nil
+}
+
 func (s *ProgressService) CreateProgress(
 	userID int,
 	targetCode string,

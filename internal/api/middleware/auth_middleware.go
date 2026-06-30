@@ -37,6 +37,37 @@ func RequireAuth(authService *services.AuthService) func(http.Handler) http.Hand
 	}
 }
 
+func RequirePermission(
+	authorizationService *services.AuthorizationService,
+	permissionCode string,
+) func(http.Handler) http.Handler {
+	return func(next http.Handler) http.Handler {
+		return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			user, ok := CurrentUser(r)
+			if !ok {
+				responses.Unauthorized(w, "User is not authenticated")
+				return
+			}
+
+			hasPermission, err := authorizationService.UserHasPermission(
+				user.ID,
+				permissionCode,
+			)
+			if err != nil {
+				responses.InternalServerError(w)
+				return
+			}
+
+			if !hasPermission {
+				responses.Forbidden(w, "You do not have permission to perform this action")
+				return
+			}
+
+			next.ServeHTTP(w, r)
+		})
+	}
+}
+
 func CurrentUser(r *http.Request) (*dbModels.User, bool) {
 	user, ok := r.Context().Value(currentUserContextKey).(*dbModels.User)
 

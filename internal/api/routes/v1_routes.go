@@ -13,6 +13,18 @@ func RegisterV1Routes(router chi.Router, deps Dependencies) {
 		RegisterMeRoutes(me, deps)
 	})
 
+	router.Route("/languages", func(languages chi.Router) {
+		RegisterLanguageRoutes(languages, deps)
+	})
+
+	router.Route("/levels", func(levels chi.Router) {
+		RegisterLevelRoutes(levels, deps)
+	})
+
+	router.Route("/practice", func(practice chi.Router) {
+		RegisterPracticeRoutes(practice, deps)
+	})
+
 	router.Route("/progress", func(progress chi.Router) {
 		RegisterProgressRoutes(progress, deps)
 	})

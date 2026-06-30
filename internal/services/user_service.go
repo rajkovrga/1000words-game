@@ -128,8 +128,20 @@ func validateEmail(email string) error {
 		return errors.New("email is required")
 	}
 
-	_, err := mail.ParseAddress(email)
+	if len(email) > 254 {
+		return errors.New("email is too long")
+	}
+
+	if strings.ContainsAny(email, " \t\r\n") {
+		return errors.New("email must not contain spaces")
+	}
+
+	parsedEmail, err := mail.ParseAddress(email)
 	if err != nil {
+		return errors.New("email is not valid")
+	}
+
+	if parsedEmail.Address != email {
 		return errors.New("email is not valid")
 	}
 
@@ -141,8 +153,12 @@ func validatePassword(password string) error {
 		return errors.New("password is required")
 	}
 
-	if len(password) < 6 {
-		return errors.New("password must have at least 6 characters")
+	if len(password) < 8 {
+		return errors.New("password must have at least 8 characters")
+	}
+
+	if len(password) > 72 {
+		return errors.New("password is too long")
 	}
 
 	return nil

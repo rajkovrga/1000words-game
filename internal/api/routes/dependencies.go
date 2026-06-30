@@ -16,6 +16,7 @@ type Dependencies struct {
 	AuthorizationService *services.AuthorizationService
 	UserService          *services.UserService
 	LanguageService      *services.LanguageService
+	PracticeService      *services.PracticeService
 	ProgressService      *services.ProgressService
 	GameService          *services.GameService
 }

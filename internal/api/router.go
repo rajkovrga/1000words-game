@@ -23,6 +23,7 @@ type RouterDependencies struct {
 	AuthorizationService *services.AuthorizationService
 	UserService          *services.UserService
 	LanguageService      *services.LanguageService
+	PracticeService      *services.PracticeService
 	ProgressService      *services.ProgressService
 	GameService          *services.GameService
 }
@@ -57,6 +58,7 @@ func NewRouter(deps RouterDependencies) http.Handler {
 		AuthorizationService: deps.AuthorizationService,
 		UserService:          deps.UserService,
 		LanguageService:      deps.LanguageService,
+		PracticeService:      deps.PracticeService,
 		ProgressService:      deps.ProgressService,
 		GameService:          deps.GameService,
 	})

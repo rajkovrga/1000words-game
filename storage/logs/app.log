@@ -53,3 +53,8 @@ time=2026-06-30T20:45:37.903+02:00 level=INFO msg="Application finished"
 time=2026-06-30T22:49:48.891+02:00 level=INFO msg="Database connected" path=words.db
 time=2026-06-30T22:57:04.911+02:00 level=INFO msg="Database connected" path=words.db
 time=2026-06-30T23:14:13.960+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T23:23:31.066+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T23:38:53.844+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T23:44:20.888+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T23:56:20.034+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-01T00:26:44.041+02:00 level=INFO msg="Database connected" path=words.db
