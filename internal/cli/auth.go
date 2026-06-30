@@ -8,7 +8,7 @@ import (
 
 func (a *App) runGame() error {
 	if a.currentUser != nil {
-		return a.startGameForUser(a.currentUser)
+		return a.runUserMenu()
 	}
 
 	for {
@@ -29,7 +29,7 @@ func (a *App) runGame() error {
 			}
 
 			a.currentUser = user
-			return a.startGameForUser(a.currentUser)
+			return a.runUserMenu()
 
 		case "2":
 			user, err := a.register()
@@ -38,7 +38,7 @@ func (a *App) runGame() error {
 			}
 
 			a.currentUser = user
-			return a.startGameForUser(a.currentUser)
+			return a.runUserMenu()
 
 		case "0":
 			return nil

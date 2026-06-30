@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	dbModels "1000words-game/models/db"
 )
 
 func (a *App) readText(label string) string {
@@ -99,4 +101,30 @@ func (a *App) chooseLanguages() (string, string, error) {
 	}
 
 	return targetCode, nativeCode, nil
+}
+
+func normalizeAnswer(value string) string {
+	value = strings.TrimSpace(value)
+	value = strings.ToLower(value)
+
+	return value
+}
+
+func normalizeLanguageCode(value string) string {
+	value = strings.TrimSpace(value)
+	value = strings.ToLower(value)
+
+	return value
+}
+
+func languageCodeExists(languages []dbModels.Language, code string) bool {
+	code = normalizeLanguageCode(code)
+
+	for _, language := range languages {
+		if language.Code == code {
+			return true
+		}
+	}
+
+	return false
 }
