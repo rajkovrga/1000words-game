@@ -50,3 +50,6 @@ time=2026-06-30T14:19:35.468+02:00 level=INFO msg="Application finished"
 time=2026-06-30T20:44:29.207+02:00 level=INFO msg="Application started" app=1000words-game
 time=2026-06-30T20:44:29.242+02:00 level=INFO msg="Database connected" path=words.db
 time=2026-06-30T20:45:37.903+02:00 level=INFO msg="Application finished"
+time=2026-06-30T22:49:48.891+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T22:57:04.911+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-06-30T23:14:13.960+02:00 level=INFO msg="Database connected" path=words.db
