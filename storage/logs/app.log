@@ -59,3 +59,12 @@ time=2026-06-30T23:44:20.888+02:00 level=INFO msg="Database connected" path=word
 time=2026-06-30T23:56:20.034+02:00 level=INFO msg="Database connected" path=words.db
 time=2026-07-01T00:26:44.041+02:00 level=INFO msg="Database connected" path=words.db
 time=2026-07-01T00:44:16.294+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-03T19:39:36.789+02:00 level=INFO msg="Application started" app=1000words-game
+time=2026-07-03T19:39:36.868+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-03T20:30:22.114+02:00 level=INFO msg="Application started" app=1000words-game
+time=2026-07-03T20:30:22.154+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-03T20:32:06.666+02:00 level=INFO msg="Application finished"
+time=2026-07-03T21:41:45.546+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-03T23:48:47.581+02:00 level=INFO msg="Application started" app=1000words-game
+time=2026-07-03T23:48:47.614+02:00 level=INFO msg="Database connected" path=words.db
+time=2026-07-03T23:51:28.358+02:00 level=INFO msg="Application finished"
